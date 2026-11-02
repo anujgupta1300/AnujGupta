@@ -1,0 +1,149 @@
+
+<style>
+:root{--yellow:#EAB308;--indigo:#818CF8;--red:#C92A2A;--dark:#0a0a0a;--mid:#4B5563;--border-c:#E5E7EB;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:transparent;}
+.wrap{display:flex;flex-direction:column;gap:0;padding:1.5rem 0;}
+.phase{display:grid;grid-template-columns:120px 1fr;gap:0;}
+.phase-num{font-size:11px;color:var(--text-muted);font-weight:500;padding:1rem 0 1rem 0;border-right:0.5px solid var(--border);display:flex;flex-direction:column;align-items:flex-end;padding-right:16px;gap:4px;min-height:80px;}
+.phase-num span{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;font-size:10px;font-weight:500;color:#fff;}
+.n-load{background:var(--dark);}
+.n-scroll{background:var(--mid);}
+.n-photo{background:var(--yellow);}
+.n-tech{background:var(--red);}
+.n-contact{background:var(--indigo);}
+.phase-body{padding:1rem 0 1rem 1.5rem;border-bottom:0.5px solid var(--border);}
+.phase-title{font-size:14px;font-weight:500;color:var(--text-primary);margin-bottom:6px;}
+.phase-desc{font-size:12px;color:var(--text-secondary);line-height:1.6;margin-bottom:10px;}
+.tags{display:flex;flex-wrap:wrap;gap:6px;}
+.tag{font-size:11px;padding:2px 8px;border-radius:var(--radius);background:var(--bg-accent);color:var(--text-accent);border:0.5px solid var(--border-accent);}
+.tag-y{background:#fef9c3;color:#854d0e;border-color:#fde047;}
+.tag-r{background:#fee2e2;color:#991b1b;border-color:#fca5a5;}
+.tag-v{background:#ede9fe;color:#5b21b6;border-color:#c4b5fd;}
+.tag-n{background:var(--surface-1);color:var(--text-secondary);border-color:var(--border);}
+.motion-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:500;padding:2px 8px;border-radius:var(--radius);margin-top:8px;}
+.mb-spring{background:#f0fdf4;color:#166534;border:0.5px solid #86efac;}
+.mb-scroll{background:#eff6ff;color:#1e40af;border:0.5px solid #93c5fd;}
+.mb-inview{background:#faf5ff;color:#6b21a8;border:0.5px solid #d8b4fe;}
+.mb-exit{background:#fef2f2;color:#991b1b;border:0.5px solid #fca5a5;}
+.section-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);font-weight:500;padding:0.5rem 0 0.5rem 0;grid-column:1/-1;}
+.hero-mini{display:flex;gap:8px;margin-top:10px;}
+.hm-block{height:32px;border-radius:4px;flex:1;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;}
+.hm-dark{background:var(--dark);color:#fff;}
+.hm-light{background:var(--border-c);color:#374151;}
+.card-stack{display:flex;gap:-4px;margin-top:8px;position:relative;height:40px;}
+.cs{position:absolute;width:80px;height:32px;border-radius:4px;border:0.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;}
+.cs1{background:var(--surface-2);left:0px;top:0;z-index:3;}
+.cs2{background:var(--surface-1);left:8px;top:4px;z-index:2;color:var(--text-muted);}
+.cs3{background:var(--surface-0);left:16px;top:8px;z-index:1;color:var(--text-muted);}
+</style>
+<h2 class="sr-only">Portfolio motion architecture — six animation phases from loading screen to contact</h2>
+<div class="wrap">
+
+<div class="phase">
+<div class="section-label">Animation Phases</div>
+</div>
+
+<div class="phase">
+  <div class="phase-num">
+    <span class="n-load">1</span>
+    <span style="font-size:10px;text-align:right">Loading<br>Screen</span>
+  </div>
+  <div class="phase-body">
+    <div class="phase-title">Cinematic intro — start.jpg</div>
+    <div class="phase-desc">Full-viewport black overlay. Hero image scales from 1.2x to 1.0x. Name chars stagger up from y:120. Yellow progress bar sweeps to 100%. Overlay slides off screen upward.</div>
+    <div class="tags">
+      <span class="tag tag-n">AnimatePresence</span>
+      <span class="tag tag-n">staggerChildren</span>
+      <span class="tag tag-y">exit y: -100vh</span>
+    </div>
+    <div><span class="motion-badge mb-spring">spring stiffness:100 damping:14</span></div>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-num">
+    <span class="n-scroll">2</span>
+    <span style="font-size:10px;text-align:right">Hero<br>Scroll</span>
+  </div>
+  <div class="phase-body">
+    <div class="phase-title">Image sinks, portfolio emerges</div>
+    <div class="phase-desc">Scroll 0-400px: hero image scales 1.0→0.68, gains 24px radius, fades to 25% opacity. Portfolio grid fades up from underneath simultaneously.</div>
+    <div class="hero-mini">
+      <div class="hm-block hm-dark">Hero ↓</div>
+      <div class="hm-block hm-light" style="background:#f9fafb;">Grid ↑</div>
+    </div>
+    <div style="margin-top:8px"><span class="motion-badge mb-scroll">useScroll + useTransform</span><span class="motion-badge mb-scroll" style="margin-left:6px">useSpring smooth</span></div>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-num">
+    <span class="n-photo">3</span>
+    <span style="font-size:10px;text-align:right">Photo<br>Grid</span>
+  </div>
+  <div class="phase-body">
+    <div class="phase-title">Surrounding photos with tilt physics</div>
+    <div class="phase-desc">4-6 photos orbit the center hero portrait in a bento grid. Each enters from its quadrant (top-left, top-right etc). 3D tilt tracks mouse position — rotateX/Y ±8deg.</div>
+    <div class="tags">
+      <span class="tag tag-n">useInView</span>
+      <span class="tag tag-n">onMouseMove</span>
+      <span class="tag tag-v">perspective(1000px)</span>
+    </div>
+    <div><span class="motion-badge mb-inview">IntersectionObserver trigger</span></div>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-num">
+    <span class="n-tech">4</span>
+    <span style="font-size:10px;text-align:right">Tech<br>Cards</span>
+  </div>
+  <div class="phase-body">
+    <div class="phase-title">Colored bento cards — spring on hover</div>
+    <div class="phase-desc">GSAP (yellow), React (indigo), Laravel (red), Design (gray). Each whileHover scale:1.06 rotate:-1. Asymmetric bento grid, never 4-equal-cards.</div>
+    <div class="tags">
+      <span class="tag tag-y">Yellow #EAB308</span>
+      <span class="tag tag-v">Indigo #818CF8</span>
+      <span class="tag tag-r">Red #C92A2A</span>
+      <span class="tag tag-n">Gray #4B5563</span>
+    </div>
+    <div><span class="motion-badge mb-spring">whileHover spring</span></div>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-num">
+    <span class="n-contact">5</span>
+    <span style="font-size:10px;text-align:right">Contact<br>Cards</span>
+  </div>
+  <div class="phase-body">
+    <div class="phase-title">Stacked card deck fans open on hover</div>
+    <div class="phase-desc">Three cards layered (contact form / socials / availability). On hover: card 2 fans right, card 3 fans left with rotation. Card 1 scales up. Real-estate card motion aesthetic.</div>
+    <div class="card-stack">
+      <div class="cs cs3">Avail</div>
+      <div class="cs cs2">Social</div>
+      <div class="cs cs1">Form</div>
+    </div>
+    <div style="margin-top:6px"><span class="motion-badge mb-spring">spring stiffness:200 damping:25</span></div>
+  </div>
+</div>
+
+<div class="phase">
+  <div class="phase-num">
+    <span style="background:var(--mid)" class="n-scroll">6</span>
+    <span style="font-size:10px;text-align:right">Every<br>Section</span>
+  </div>
+  <div class="phase-body">
+    <div class="phase-title">Global scroll entrance — all sections</div>
+    <div class="phase-desc">Every section uses useInView. fadeUpVariants: hidden y:40 opacity:0 → visible y:0 opacity:1. staggerChildren index×0.1s. prefers-reduced-motion respected.</div>
+    <div class="tags">
+      <span class="tag tag-n">useInView once</span>
+      <span class="tag tag-n">custom delay index</span>
+      <span class="tag tag-v">reduced-motion media</span>
+    </div>
+    <div><span class="motion-badge mb-inview">motion/react — no scroll listeners</span></div>
+  </div>
+</div>
+
+</div>

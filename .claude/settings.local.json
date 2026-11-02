@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem -Recurse -File src,public | Where-Object { $_.FullName -notmatch 'node_modules' } | Select-Object @{n='Path';e={$_.FullName.Replace\\($PWD.Path+'\\\\',''\\)}}, Length)",
+      "PowerShell(npm install *)",
+      "PowerShell(npm run *)",
+      "PowerShell(Get-ChildItem -Recurse -File src | Where-Object { $_.FullName -notmatch 'node_modules' } | Select-Object @{n='Path';e={$_.FullName.Replace\\(\\(Get-Location\\).Path + '\\\\',''\\)}} | Format-Table -AutoSize)",
+      "Skill(impeccable)",
+      "PowerShell(npx tsc -p tsconfig.app.json --noEmit)",
+      "PowerShell(node .claude/skills/impeccable/scripts/context.mjs --target src/components/PhotographySection.tsx)",
+      "PowerShell(node \"C:\\\\Users\\\\Anuj Gupta\\\\.claude\\\\skills\\\\impeccable\\\\scripts\\\\context.mjs\" --target \"src/components/PhotographySection.tsx\")",
+      "PowerShell(npx tsc --noEmit -p tsconfig.json 2>&1 | Select-Object -First 40)",
+      "PowerShell(npx vite build 2>&1 | Select-Object -Last 25)",
+      "PowerShell(git status *)"
+    ]
+  }
+}

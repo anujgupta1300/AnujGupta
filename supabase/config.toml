@@ -1,0 +1,10 @@
+# Supabase CLI config. Replace project_id with your project ref
+# (Dashboard > Project Settings > General > Reference ID), or run
+# `supabase link --project-ref <ref>` which manages linking for you.
+project_id = "aj-portfolio"
+
+[functions.notify-new-contact-message]
+# This function is invoked by a Database Webhook using the service role, so it
+# does not need to verify a user JWT. Keeping verify_jwt off lets the webhook
+# call it directly. (It is not a public client-callable endpoint.)
+verify_jwt = false

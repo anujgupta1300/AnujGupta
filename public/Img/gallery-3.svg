@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800" role="img" aria-label="GALLERY 3 placeholder">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0e0e10"/>
+      <stop offset="1" stop-color="#1a1a1d"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="800" fill="url(#g)"/>
+  <rect x="24" y="24" width="552" height="752" rx="24" fill="none" stroke="#C92A2A" stroke-width="3" stroke-dasharray="14 12" opacity="0.65"/>
+  <circle cx="300" cy="350" r="45" fill="none" stroke="#C92A2A" stroke-width="3" opacity="0.5"/>
+  <text x="300" y="450" font-family="Outfit, Arial, sans-serif" font-size="50" font-weight="600" fill="#fafafa" text-anchor="middle">GALLERY 3</text>
+  <text x="300" y="485" font-family="Outfit, Arial, sans-serif" font-size="21" font-weight="400" fill="#9CA3AF" text-anchor="middle">600 x 800 &#183; replace me</text>
+</svg>
