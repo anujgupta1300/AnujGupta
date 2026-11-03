@@ -1,73 +1,127 @@
-# Welcome to your Lovable project
+# Anuj Gupta — Portfolio
 
-## Project info
+A modern, animated personal portfolio showcasing my projects, research, experience, certificates, and photography. Built with React, TypeScript, and Tailwind CSS, with a working contact form backed by Supabase.
 
-**URL**: https://lovable.dev/projects/2f936d26-bb4a-4838-95d6-51aa61ebbc25
+**Live site:** <!-- add your Vercel URL here, e.g. https://your-site.vercel.app -->
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## Features
 
-**Use Lovable**
+- **Single-page layout** with smooth section navigation: Hero, About, Tech Stack, Projects, Work, Experience, Research, Achievements, Certificates, Photography, and Contact
+- **Polished animations** powered by Motion, including scroll reveals, tilt cards, and an image wheel
+- **Contact form** that stores messages in Supabase and sends an email notification to the owner
+- **Spam protection** through a hidden honeypot field and row-level security (public visitors can only submit, never read)
+- **Responsive design** that works across mobile, tablet, and desktop
+- **Fast builds and deploys** with Vite, ready for Vercel
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/2f936d26-bb4a-4838-95d6-51aa61ebbc25) and start prompting.
+## Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+| Area | Tools |
+| --- | --- |
+| Framework | React 18, TypeScript |
+| Build tool | Vite |
+| Styling | Tailwind CSS, shadcn/ui (Radix UI) |
+| Animation | Motion |
+| Routing and data | React Router, TanStack Query |
+| Backend | Supabase (Postgres + Edge Functions) |
+| Email | Resend |
+| Hosting | Vercel |
 
-**Use your preferred IDE**
+## Getting Started
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Prerequisites
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- [Node.js](https://nodejs.org/) 18 or newer
+- npm
 
-Follow these steps:
+### Installation
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+```bash
+# 1. Clone the repository
+git clone https://github.com/anujgupta1300/Anuj-Gupta-2026.git
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# 2. Go into the project folder
+cd Anuj-Gupta-2026
 
-# Step 3: Install the necessary dependencies.
-npm i
+# 3. Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# 4. Set up environment variables
+cp .env.example .env.local
+# then open .env.local and fill in your Supabase values
+
+# 5. Start the dev server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The app runs at `http://localhost:8080`.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Environment Variables
 
-**Use GitHub Codespaces**
+| Variable | Description |
+| --- | --- |
+| `VITE_SUPABASE_URL` | Your Supabase project URL |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | Your Supabase publishable key (`sb_publishable_...`) |
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Both values are safe to expose in the browser. Never put a secret key or an email-provider key in these variables. Server-side secrets belong in the Supabase Edge Function environment only.
 
-## What technologies are used for this project?
+## Available Scripts
 
-This project is built with:
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Starts the development server |
+| `npm run build` | Creates a production build in `dist/` |
+| `npm run preview` | Serves the production build locally |
+| `npm run lint` | Runs ESLint |
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Project Structure
 
-## How can I deploy this project?
+```
+.
+├── public/               # Static assets (images, resume, favicon)
+├── src/
+│   ├── components/       # Page sections and UI components
+│   │   └── ui/           # shadcn/ui primitives
+│   ├── hooks/            # Custom React hooks
+│   ├── lib/              # Supabase client, motion presets, utilities
+│   ├── pages/            # Route pages
+│   ├── App.tsx           # Routes and providers
+│   └── main.tsx          # App entry point
+├── supabase/
+│   ├── migrations/       # Database schema (contact_messages table + RLS)
+│   └── functions/        # Edge Function that emails new messages
+├── vercel.json           # Vercel build and routing config
+└── SUPABASE_SETUP.md     # Full contact form setup guide
+```
 
-Simply open [Lovable](https://lovable.dev/projects/2f936d26-bb4a-4838-95d6-51aa61ebbc25) and click on Share -> Publish.
+## Contact Form Setup
 
-## Can I connect a custom domain to my Lovable project?
+The contact form saves each message to Supabase and emails it to the site owner:
 
-Yes, you can!
+```
+Contact form → Supabase table → Edge Function → Resend → Inbox
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Follow the step-by-step guide in [SUPABASE_SETUP.md](./SUPABASE_SETUP.md) to create the table, deploy the Edge Function, and connect the database webhook.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## Deployment
+
+The site is deployed on [Vercel](https://vercel.com).
+
+1. Push this repository to GitHub.
+2. Import the repository in Vercel. It detects Vite automatically (build command `npm run build`, output directory `dist`).
+3. Add `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` under **Settings → Environment Variables**.
+4. Deploy. Every push to the main branch redeploys automatically.
+
+> Environment variables are applied at build time. If you add or change them, trigger a redeploy.
+
+## Contact
+
+**Anuj Gupta**
+Email: [anujgupta3600@gmail.com](mailto:anujgupta3600@gmail.com)
+GitHub: [@anujgupta1300](https://github.com/anujgupta1300)
+
+---
+
+© 2026 Anuj Gupta. All rights reserved.
