@@ -7,16 +7,20 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabasePublishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
 
-if (!supabaseUrl || !supabasePublishableKey) {
-  // Fail loudly in dev rather than silently inserting against a placeholder
-  // project, which would swallow every submission. Production builds surface
-  // the form's on-brand error state instead of crashing the page.
-  console.error(
-    'Missing Supabase env vars. Set VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY in .env.local (see SUPABASE_SETUP.md).'
+export const isSupabaseConfigured = Boolean(supabaseUrl && supabasePublishableKey)
+
+if (!isSupabaseConfigured) {
+  // IMPORTANT: never let missing env vars crash the whole site. createClient()
+  // throws "supabaseUrl is required" on an empty string, which happens at import
+  // time and leaves a blank white page. We warn instead and fall back to a
+  // placeholder client; the contact form's try/catch then shows its normal
+  // "Could not send" message until the env vars are set.
+  console.warn(
+    'Missing Supabase env vars. Set VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY (.env.local locally, Project Settings > Environment Variables on Vercel).'
   )
 }
 
 export const supabase = createClient(
-  supabaseUrl ?? '',
-  supabasePublishableKey ?? ''
+  supabaseUrl || 'https://placeholder.supabase.co',
+  supabasePublishableKey || 'placeholder-key'
 )
